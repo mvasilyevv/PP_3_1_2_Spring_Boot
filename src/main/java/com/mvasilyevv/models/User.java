@@ -3,19 +3,15 @@ package com.mvasilyevv.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "User")
 public class User {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "name")
     private String name;
 
     @Column(name = "year_of_birth")
     private int yearOfBirth;
 
-    @Column(name = "email")
     private String email;
 
     public User() {

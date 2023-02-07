@@ -4,10 +4,12 @@ import com.mvasilyevv.dao.UserDAO;
 import com.mvasilyevv.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
@@ -28,16 +30,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void save(User user) {
         userDAO.save(user);
     }
 
     @Override
+    @Transactional
     public void update(User updatedUser, long id) {
         userDAO.update(updatedUser, id);
     }
 
     @Override
+    @Transactional
     public void delete(long id) {
         userDAO.delete(id);
     }

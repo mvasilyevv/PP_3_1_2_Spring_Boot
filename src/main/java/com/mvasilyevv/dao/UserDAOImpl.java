@@ -4,13 +4,11 @@ import com.mvasilyevv.models.User;
 import jakarta.persistence.EntityManager;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Service
-@Transactional(readOnly = true)
+@Repository
 public class UserDAOImpl implements UserDAO {
 
     private final Session session;
@@ -19,7 +17,6 @@ public class UserDAOImpl implements UserDAO {
     public UserDAOImpl(EntityManager entityManager) {
          session = entityManager.unwrap(Session.class);
     }
-
 
     @Override
     public List<User> findAll() {
@@ -32,13 +29,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    @Transactional
     public void save(User user) {
         session.persist(user);
     }
 
     @Override
-    @Transactional
     public void update(User updatedUser, long id) {
         User newUser = session.get(User.class, id);
         newUser.setId(updatedUser.getId());
@@ -48,7 +43,6 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    @Transactional
     public void delete(long id) {
         session.remove(session.get(User.class, id));
     }

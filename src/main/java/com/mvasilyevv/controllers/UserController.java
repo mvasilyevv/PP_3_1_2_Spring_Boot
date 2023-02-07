@@ -18,19 +18,11 @@ public class UserController {
         this.userService = userService;
     }
 
-    /////////////
-    //////  Show all users list
-    ////////////
     @GetMapping
     public String show(Model model) {
         model.addAttribute("users", userService.findAll());
         return "users/show";
     }
-
-    /////////////
-    //////  Add new user
-    ////////////
-
     @GetMapping("/new")
     public String newUser(Model model) {
         model.addAttribute("user", new User());
@@ -43,19 +35,11 @@ public class UserController {
         return "redirect:/users";
     }
 
-    /////////////
-    //////  Show detail user's information
-    ////////////
-
     @GetMapping("/{id}")
     public String index(@PathVariable("id") long id, Model model) {
         model.addAttribute("user",userService.findById(id));
         return "users/index";
     }
-
-    /////////////
-    //////  Update user's data
-    ////////////
 
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") long id, Model model) {
@@ -68,10 +52,6 @@ public class UserController {
         userService.update(user, id);
         return "redirect:/users";
     }
-
-    /////////////
-    //////  Delete user
-    ////////////
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") long id) {
